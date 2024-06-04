@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Chat App</title>
+  <script
+  src="https://code.jquery.com/jquery-3.4.1.min.js"
+  integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+  crossorigin="anonymous"></script>
+  <script defer src="http://localhost:3000/socket.io/socket.io.js"></script>
+  <script defer src="script.js"></script>
+  <style>
+    body {
+      padding: 0;
+      margin: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(120deg, #a1c4fd, #c2e9fb);
+    }
+
+    #message-container {
+      width: 80%;
+      max-width: 800px;
+      margin: 20px auto;
+      border-radius: 15px;
+      background: rgba(255, 255, 255, 0.8);
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+      padding: 20px;
+      overflow-y: auto;
+      max-height: 400px;
+    }
+
+    .message {
+      background-color: #f9f9f9;
+      padding: 10px;
+      border-radius: 15px;
+      margin-bottom: 10px;
+      animation: fadeIn 0.5s ease;
+    }
+
+    .message:nth-child(2n) {
+      background-color: #e6e6e6;
+    }
+
+    @keyframes fadeIn {
+      0% {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      100% {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    #send-container {
+      position: fixed;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      max-width: 800px;
+      width: 80%;
+      display: flex;
+      align-items: center;
+    }
+
+    #message-input {
+      flex-grow: 1;
+      border: none;
+      padding: 10px;
+      border-radius: 20px;
+      margin-right: 10px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      outline: none;
+    }
+
+    #send-button {
+      background-color: #4caf50;
+      color: white;
+      border: none;
+      padding: 12px 20px;
+      border-radius: 20px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+      outline: none;
+    }
+
+    #send-button:hover {
+      background-color: #45a049;
+    }
+
+    /* Typing indicator styles */
+    #typing-indicator {
+      display: none;
+      position: absolute;
+      bottom: 60px;
+      left: 50%;
+      transform: translateX(-50%);
+      background-color: rgba(255, 255, 255, 0.8);
+      border-radius: 25px;
+      padding: 8px 16px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    #typing-bubble {
+      width: 10px;
+      height: 10px;
+      background-color: #4caf50;
+      border-radius: 50%;
+      display: inline-block;
+      margin-right: 5px;
+      animation: typingBubble 1s infinite ease-in-out alternate;
+    }
+
+    @keyframes typingBubble {
+      0% {
+        transform: translateY(0);
+        opacity: 1;
+      }
+      50% {
+        transform: translateY(-5px);
+        opacity: 0.5;
+      }
+      100% {
+        transform: translateY(0);
+        opacity: 1;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div id="message-container">
+
+  </div>
+  <div id="typing-indicator">
+    <div id="typing-bubble"></div> 
+    Typing...
+  </div>
+  <form id="send-container">
+    <input type="text" id="message-input" placeholder="Type your message...">
+    <button type="submit" id="send-button">Send</button>
+  </form>
+</body>
+</html>
